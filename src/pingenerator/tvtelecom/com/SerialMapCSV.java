@@ -70,7 +70,7 @@ LOG.log(Level.INFO,"SerialMapCSV JobId:{0}",new Object[]{jobId});
 					result = "Sr. No,Voucher Template type,Voucher Batch Number,Voucher Template Name,Serial ID,Pin Number,Status,Package Name,Reseller Account Number,Lock status,Scrap status,Tenant Code\r\n";
 					int count = 0;
 					while (rs1.next()) {
-						result += ++count + ",External,BAT"+batchNumber+","+channelname+","+rs1.getString("SERIAL")+","+rs1.getString("PIN")+",Generated,,,Lock,Unscrap,Default\r\n";
+						result += ++count + ",External,"+batchPrefix+batchNumber+","+channelname+","+rs1.getString("SERIAL")+","+rs1.getString("PIN")+",Generated,,,Lock,Unscrap,Default\r\n";
 					}
 				}
 				
