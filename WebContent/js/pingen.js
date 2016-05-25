@@ -255,6 +255,20 @@ function menuManageCurrentMaxSerial() {
 		});
 	});
 }
+
+function menuLogAudit() {
+	Ink.requireModules(['Ink.Net.Ajax_1','Ink.Dom.Element_1'], function(Ajax,InkElement) {
+		var container = Ink.i('main-panel');
+		crs = (function () { return; })(); modalManageSerial = (function () { return; })();
+		Ajax.load('log-audit.html', function (res) {
+		    InkElement.setHTML(container,res);
+			Ajax.load('LogAuditTable', function (res) {
+		    	InkElement.setHTML(Ink.i('tbodyLogAudit'),res);
+			});
+		});
+	});
+}
+
 function menuManageUsers() {
 	Ink.requireModules(['Ink.Net.Ajax_1','Ink.Dom.Element_1'], function(Ajax,InkElement) {
 		var container = Ink.i('main-panel');
