@@ -22,16 +22,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-@WebServlet("/LogAuditTable")
-public class LogAuditTable extends HttpServlet {
+@WebServlet("/LogTableAudit")
+public class LogTableAudit extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public LogAuditTable() {
+    public LogTableAudit() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Logger LOG = Logger.getLogger(LogAuditTable.class.getName());
+        Logger LOG = Logger.getLogger(LogTableAudit.class.getName());
         request.setCharacterEncoding(Utils.CharacterEncoding);
         
 		HttpSession session = request.getSession(false);

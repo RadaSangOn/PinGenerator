@@ -51,7 +51,7 @@ LOG.log(Level.INFO,"PinGenVIP3M jobId: {0}",new Object[]{jobId});
 		String sql2 = "update pin set serial = ?, status = 'M', updatedby = "+userId+", updateddate = CURRENT_TIMESTAMP where pin = ?";
 		
 		Statement st3 = null;
-		String sql3 = "UPDATE job SET STATUS = 'S' WHERE jobid = '"+jobId+"'";
+		String sql3 = "UPDATE job SET AMOUNT = _amount, STATUS = 'S' WHERE jobid = '"+jobId+"'";
 		
 		String desc2 = "";
 		String batchNumberPrefix = "";
@@ -94,7 +94,8 @@ LOG.log(Level.INFO,"PinGenVIP3M {0} {1} {2} {3}",new Object[]{batchNumberPrefix,
 				st2 = con.prepareStatement(sql2);
 				rs1.close();
 				rs1 = st1.executeQuery(sql11);
-				while (rs1.next()) {
+				int count = 0;
+				while (rs1.next()) {count++;
 					pin = rs1.getString("PIN");
 
 					st2.setString(1, serialNumberPrefix + Long.toString(serial).substring(1));
@@ -108,6 +109,7 @@ LOG.log(Level.INFO,"PinGenVIP3M {0} {1} {2} {3}",new Object[]{batchNumberPrefix,
 				Files.write(pathSerial, (serialNumberPrefix+"|"+Long.toString(serial).substring(1)).getBytes(), StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING);
 				
 				st3 = con.createStatement();
+				sql3 = sql3.replaceAll("_amount", Integer.toString(count));
 				st3.executeUpdate(sql3);
 
 				result = "succeed";

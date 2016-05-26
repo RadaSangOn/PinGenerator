@@ -256,13 +256,54 @@ function menuManageCurrentMaxSerial() {
 	});
 }
 
+function menuLogMapping() {
+	Ink.requireModules(['Ink.Net.Ajax_1','Ink.Dom.Element_1','Ink.Net.JsonP_1'], function(Ajax,InkElement,JsonP) {
+		var container = Ink.i('main-panel');
+		Ajax.load('log-mapping.html', function (res) {
+		    InkElement.setHTML(container,res);
+	        var uri = window.url_home + '/LogTableMapping';
+	        new Ajax(uri, {
+	            method: 'GET',
+	            onSuccess: function(obj) {
+	                if(obj && obj.responseJSON) {
+	                  	var json = obj.responseJSON;
+	        			var LogMapping = Ink.i('tbodyLogMapping');
+						for(var i=0, total=json.logMapping.length; i < total; i++) {
+						    var contents = '<tr>';
+						    if (json.logMapping[i].STATUS != 'S') {
+						    	//contents += '<td class="align-center"><i class="fa fa-download" aria-hidden="true"></i></td>';
+						    	contents += '<td class="align-center"></td>';
+						    } else {
+						    	contents += '<td class="align-center"><a style="color:green" href="'+window.url_home+'/'+json.logMapping[i].LINK+'"><i class="fa fa-download" aria-hidden="true"></i></a></td>';
+						    }
+						    contents += '<td class="align-center">'+json.logMapping[i].BATCHNUMBER+'</td>';
+						    contents += '<td class="align-center">'+json.logMapping[i].JOBTYPE+'</td>';
+						    contents += '<td class="align-center">'+json.logMapping[i].DIGIT+'</td>';
+						    contents += '<td class="align-center">'+json.logMapping[i].AMOUNT+'</td>';
+						    contents += '<td class="align-center">'+json.logMapping[i].UPDATEDDATE+'</td>';
+						    contents += '<td class="align-center">'+json.logMapping[i].UPDATEDTIME+'</td>';
+						    contents += '<td class="align-center">'+json.logMapping[i].UPDATEDBYUSERNAME+'</td>';
+						    //contents += '<td class="align-left">'+json.logMapping[i].UPDATEDBYNAME+'</td>';
+						    contents += '</tr>';
+						    InkElement.appendHTML(LogMapping,contents);
+						}
+	                }
+	            }, 
+	            onFailure: function() {
+	Ink.log("result: failed on network!");
+	            }
+	        });
+		});
+
+	});
+}
 function menuLogAudit() {
 	Ink.requireModules(['Ink.Net.Ajax_1','Ink.Dom.Element_1'], function(Ajax,InkElement) {
 		var container = Ink.i('main-panel');
 		crs = (function () { return; })(); modalManageSerial = (function () { return; })();
 		Ajax.load('log-audit.html', function (res) {
 		    InkElement.setHTML(container,res);
-			Ajax.load('LogAuditTable', function (res) {
+			Ajax.load('LogTableAudit', function (res) {
 		    	InkElement.setHTML(Ink.i('tbodyLogAudit'),res);
 			});
 		});

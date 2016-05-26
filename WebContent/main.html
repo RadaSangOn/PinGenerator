@@ -9,6 +9,7 @@
         <!-- <li><a onclick="menuPinExport();">Export PIN</a></li>  -->
         <li><a onclick="menuPinCompare();">Compare PIN</a></li>
         <li><a onclick="menuMapSerial3();">Map Serial</a></li>
+        
         <!-- <li><a onclick="menuMapSerial();">Map Serial</a></li> -->
         <!-- <li><a onclick="menuPinLoad();">Load PIN</a></li> -->
         <li class="submenu">
@@ -20,15 +21,22 @@
             </ul>
         </li>
         <li class="submenu">
+            <a>Log<i class="fa fa-chevron-right push-right space-top-font"></i></a>
+            <ul class="submenu flyout right" style="background:#1b99ee;">
+                <li><a onclick="menuLogMapping();" style="color:white;width:150px;">Mapping Log</a></li>
+                <li><a onclick="menuLogAudit()" style="color:white;">Audit Log</a></li>
+            </ul>
+        </li>
+        <li class="submenu">
             <a>Manage<i class="fa fa-chevron-right push-right space-top-font"></i></a>
             <ul class="submenu flyout right" style="background:#1b99ee;">
                 <li><a onclick="menuManagePattern();" style="color:white;width:250px;">Pattern</a></li>
                 <li><a onclick="menuManageCurrentMaxSerial();" style="color:white;">Current Maximum Serial Number</a></li>
             </ul>
         </li>
-        <li><a onclick="menuLogAudit()">Audit Log</a></li>
+        
         <!-- 
-        <li><a onclick="menuJobList();">Job List</a></li>
+        
         <li><a onclick="menuPinHistory();">PIN History</a></li>
         <li class="separator-above disabled"><a>User Admin</a></li>
         
